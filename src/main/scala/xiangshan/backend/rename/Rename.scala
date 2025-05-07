@@ -166,7 +166,7 @@ class Rename(implicit p: Parameters) extends XSModule with HasCircularQueuePtrHe
   val canOut = dispatchCanAcc && fpFreeList.io.canAllocate && intFreeList.io.canAllocate && vecFreeList.io.canAllocate && v0FreeList.io.canAllocate && vlFreeList.io.canAllocate && !io.rabCommits.isWalk
 
   compressUnit.io.in.zip(io.in).foreach{ case(sink, source) =>
-    sink.valid := source.valid && !io.singleStep
+    sink.valid := false.B //source.valid && !io.singleStep
     sink.bits := source.bits
   }
   val needRobFlags = compressUnit.io.out.needRobFlags
