@@ -107,15 +107,15 @@ class MinimalConfig(n: Int = 1) extends Config(
           numWrite = None,
         ),
         icacheParameters = ICacheParameters(
-          nSets = 64, // 16KB ICache
+          nSets = 4, // 16KB ICache
           tagECC = Some("parity"),
           dataECC = Some("parity"),
           replacer = Some("setplru"),
           cacheCtrlAddressOpt = Some(AddressSet(0x38022080, 0x7f)),
         ),
         dcacheParametersOpt = Some(DCacheParameters(
-          nSets = 64, // 32KB DCache
-          nWays = 8,
+          nSets = 2, // 32KB DCache
+          nWays = 4,
           tagECC = Some("secded"),
           dataECC = Some("secded"),
           replacer = Some("setplru"),
@@ -130,21 +130,21 @@ class MinimalConfig(n: Int = 1) extends Config(
         // ============ BPU ===============
         EnableLoop = false,
         EnableGHistDiff = false,
-        FtbSize = 256,
+        FtbSize = 64,
         FtbWays = 2,
         RasSize = 8,
         RasSpecSize = 16,
         TageTableInfos =
           Seq((512, 4, 6),
             (512, 9, 6),
-            (1024, 19, 6)),
+            (512, 19, 6)),
         SCNRows = 128,
         SCNTables = 2,
         SCHistLens = Seq(0, 5),
         ITTageTableInfos =
-          Seq((256, 4, 7),
-            (256, 8, 7),
-            (512, 16, 7)),
+          Seq((128, 4, 7),
+            (128, 8, 7),
+            (128, 16, 7)),
         // ================================
         itlbParameters = TLBParameters(
           name = "itlb",
@@ -201,8 +201,8 @@ class MinimalConfig(n: Int = 1) extends Config(
         ),
         L2CacheParamsOpt = Some(L2Param(
           name = "L2",
-          ways = 8,
-          sets = 128,
+          ways = 4,
+          sets = 2,
           echoField = Seq(huancun.DirtyField()),
           prefetch = Nil,
           clientCaches = Seq(L1Param(
@@ -210,7 +210,7 @@ class MinimalConfig(n: Int = 1) extends Config(
             isKeywordBitsOpt = p.dcacheParametersOpt.get.isKeywordBitsOpt
           )),
         )),
-        L2NBanks = 2,
+        L2NBanks = 1,
         prefetcher = None // if L2 pf_recv_node does not exist, disable SMS prefetcher
       )
     )
