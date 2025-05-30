@@ -2,7 +2,7 @@ name: Nightly Regression
 on:
   schedule:
     # run at 15:33 UTC (23:33 UTC+8)
-    - cron: '33 15 * * *'
+    #- cron: '33 15 * * *'
 
 jobs:
   build:
