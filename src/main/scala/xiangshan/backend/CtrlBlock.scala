@@ -98,7 +98,8 @@ class CtrlBlockImp(
   private val rob = wrapper.rob.module
   private val memCtrl = Module(new MemCtrl(params))
 
-  private val disableFusion = decode.io.csrCtrl.singlestep || !decode.io.csrCtrl.fusion_enable
+  //private val disableFusion = decode.io.csrCtrl.singlestep || !decode.io.csrCtrl.fusion_enable
+  private val disableFusion = true.B
 
   private val s0_robFlushRedirect = rob.io.flushOut
   private val s1_robFlushRedirect = Wire(Valid(new Redirect))
